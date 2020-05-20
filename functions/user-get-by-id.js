@@ -1,10 +1,10 @@
 'use strict';
-const products = require('../products');
+const users = require('../users');
 
 module.exports.handler = async (event) => {
     try {
         const { id } = event.pathParameters;
-        const result = products.products.filter((p) => p.Id === parseInt(id))
+        const result = users.users.filter((u) => u.user === parseInt(id))
         if (result.length > 0) {
             return {
                 statusCode: 200,
