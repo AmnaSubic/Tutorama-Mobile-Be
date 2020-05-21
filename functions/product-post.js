@@ -1,5 +1,5 @@
 'use strict';
-const products = require('../users');
+const products = require('../data/users');
 
 module.exports.handler = async (event) => {
     try {
