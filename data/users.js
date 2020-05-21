@@ -14,7 +14,7 @@ module.exports = {
             password: 'secret123',
             experience: null,
             description: null,
-            tutor: 0
+            istutor: 0
         },
         {
             user: 2,
@@ -30,7 +30,7 @@ module.exports = {
             password: 'pass123',
             experience: '3 years as a statistics assistant',
             description: 'Banker',
-            tutor: 1
+            istutor: 1
         },
         {
             user: 3,
@@ -46,7 +46,7 @@ module.exports = {
             password: 'secretpass',
             experience: 'Math professor since 2018',
             description: null,
-            tutor: 1
+            istutor: 1
         }
     ],
 };

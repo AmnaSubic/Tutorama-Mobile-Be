@@ -1,16 +1,15 @@
 'use strict';
 const users = require('../data/users');
 
-module.exports.handler = async (event) => {
+module.exports.handler = async event => {
     try {
-        const { id } = event.pathParameters;
-        const result = users.users.filter((u) => u.user === parseInt(id))
+        const result = users.users.filter((u) => u.istutor === 1)
         if (result.length > 0) {
             return {
                 statusCode: 200,
                 body: JSON.stringify({
                     message: 'Your function executed successfully!',
-                    data: result[0]
+                    data: result
                 }),
             };
         } else {
@@ -33,9 +32,4 @@ module.exports.handler = async (event) => {
         };
     }
 
-    //products.products
-    //products.products.map((p) =>)
-
-    // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-    // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };

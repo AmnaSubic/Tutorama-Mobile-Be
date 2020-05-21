@@ -76,6 +76,36 @@ functions:
       - http:
           path: users/{id}
           method: get
+  tutor-get:
+    handler: functions/tutor-get-by-id.handler
+    events:
+      - http:
+          path: users/tutor/{id}
+          method: get
+  tutors-get:
+    handler: functions/tutors-get.handler
+    events:
+      - http:
+          path: users/tutors
+          method: get
+  services-get:
+    handler: functions/services-get.handler
+    events:
+      - http:
+          path: services
+          method: get
+  services-get-by-tutor-id:
+    handler: functions/services-get-by-tutor-id.handler
+    events:
+      - http:
+          path: services/tutor/{id}
+          method: get
+  classes-get-by-student-id:
+    handler: functions/classes-get-by-student-id.handler
+    events:
+      - http:
+          path: classes/student/{id}
+          method: get
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

@@ -4,7 +4,7 @@ const users = require('../data/users');
 module.exports.handler = async (event) => {
     try {
         const { id } = event.pathParameters;
-        const result = users.users.filter((u) => u.user === parseInt(id))
+        const result = users.users.filter((u) => u.user === parseInt(id) && u.tutor === 1)
         if (result.length > 0) {
             return {
                 statusCode: 200,
@@ -27,7 +27,7 @@ module.exports.handler = async (event) => {
         return {
             statusCode: 500,
             body: JSON.stringify({
-                message: 'Internal Server Error!',
+                message: "Internal Server Error!",
                 data: {},
             }),
         };
