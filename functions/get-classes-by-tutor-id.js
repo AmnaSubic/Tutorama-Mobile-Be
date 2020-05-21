@@ -19,10 +19,10 @@ module.exports.handler = async (event) => {
         const result2 =  equijoin(subjects.subjects, result1, 'subject', 'subject',
             ({name}, {c, service, student, date, start, end, place, price, subject, tutor, level}) => ({c, service, student, date, start, end, place, price, subject, name, tutor, level}));
 
-        const result3 = equijoin(users.users, result2, 'user', 'tutor',
+        const result3 = equijoin(users.users, result2, 'user', 'student',
             ({firstname, lastname}, {c, service, student, date, start, end, place, price, subject, name, tutor, level}) => ({c, service, student, date, start, end, place, price, subject, name, tutor, firstname, lastname, level}));
 
-        const final = result3.filter((c) => c.student === parseInt(id))
+        const final = result3.filter((c) => c.tutor === parseInt(id))
         if (final.length > 0) {
             return {
                 statusCode: 200,
