@@ -18,6 +18,7 @@ module.exports = {
             date: '24-05-2020',
             start: '12:00:00',
             end: '13:00:00',
+            place: 'Strawberry Street 12',
             price: 12,
             status: 'pending'
         },
@@ -28,6 +29,7 @@ module.exports = {
             date: '24-05-2020',
             start: '14:00:00',
             end: '15:00:00',
+            place: 'Downtown Street 20',
             price: 20,
             status: 'pending'
         }

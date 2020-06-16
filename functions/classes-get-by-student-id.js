@@ -14,13 +14,13 @@ module.exports.handler = async (event) => {
     try {
         const {id} = event.pathParameters;
         const result1 = equijoin(services.services, classes.classes, 'service', 'service',
-            ({subject, tutor, level}, {c, service, student, date, start, end, place, price}) => ({c, service, student, date, start, end, place, price, subject, tutor, level}));
+            ({subject, tutor, level}, {c, service, student, date, start, end, place, price, status}) => ({c, service, student, date, start, end, place, price, subject, tutor, level, status}));
 
         const result2 =  equijoin(subjects.subjects, result1, 'subject', 'subject',
-            ({name}, {c, service, student, date, start, end, place, price, subject, tutor, level}) => ({c, service, student, date, start, end, place, price, subject, name, tutor, level}));
+            ({name}, {c, service, student, date, start, end, place, price, subject, tutor, level, status}) => ({c, service, student, date, start, end, place, price, subject, name, tutor, level, status}));
 
         const result3 = equijoin(users.users, result2, 'user', 'tutor',
-            ({firstname, lastname}, {c, service, student, date, start, end, place, price, subject, name, tutor, level}) => ({c, service, student, date, start, end, place, price, subject, name, tutor, firstname, lastname, level}));
+            ({firstname, lastname}, {c, service, student, date, start, end, place, price, subject, name, tutor, level, status}) => ({c, service, student, date, start, end, place, price, subject, name, tutor, firstname, lastname, level, status}));
 
         const final = result3.filter((c) => c.student === parseInt(id))
         if (final.length > 0) {

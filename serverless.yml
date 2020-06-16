@@ -58,59 +58,41 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  products-get:
-    handler: functions/products-get.handler
+  get-user-db:
+    handler: sql/get-user-handler.handler
     events:
       - http:
-          path: products
+          path: user/{e}
           method: get
-  product-post:
-    handler: functions/product-post.handler
+  get-classes-by-student-id-db:
+    handler: sql/get-classes-by-student-id.handler
     events:
       - http:
-          path: products
-          method: post
-  product-get-by-id:
-    handler: functions/user-get-by-id.handler
-    events:
-      - http:
-          path: users/{id}
+          path: classes/{id}
           method: get
-  tutor-get:
-    handler: functions/tutor-get-by-id.handler
+  get-tutor-by-id:
+    handler: sql/get-tutor-by-id.handler
     events:
       - http:
-          path: users/tutor/{id}
+          path: tutor/{id}
           method: get
-  tutors-get:
-    handler: functions/tutors-get.handler
+  get-service-by-id:
+    handler: sql/get-service-by-id.handler
     events:
       - http:
-          path: users/tutors
+          path: service/{id}
           method: get
-  services-get:
-    handler: functions/services-get.handler
+  get-classes-by-id:
+    handler: sql/join.handler
+    events:
+      - http:
+          path: c/{id}
+          method: get
+  get-services:
+    handler: sql/get-services.handler
     events:
       - http:
           path: services
-          method: get
-  services-get-by-tutor-id:
-    handler: functions/services-get-by-tutor-id.handler
-    events:
-      - http:
-          path: services/tutor/{id}
-          method: get
-  classes-get-by-student-id:
-    handler: functions/classes-get-by-student-id.handler
-    events:
-      - http:
-          path: classes/student/{id}
-          method: get
-  get-classes-by-tutor-id:
-    handler: functions/get-classes-by-tutor-id.handler
-    events:
-      - http:
-          path: classes/tutor/{id}
           method: get
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
