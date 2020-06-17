@@ -82,12 +82,6 @@ functions:
       - http:
           path: service/{id}
           method: get
-  get-classes-by-id:
-    handler: sql/join.handler
-    events:
-      - http:
-          path: c/{id}
-          method: get
   get-services:
     handler: sql/get-services.handler
     events:

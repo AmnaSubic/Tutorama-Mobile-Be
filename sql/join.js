@@ -18,8 +18,10 @@ class Class extends Model {
                 end: Sequelize.TIME,
                 price: Sequelize.FLOAT,
                 place: Sequelize.STRING,
-                status: Sequelize.ENUM('started', 'cancelled', 'finished')
-
+                status: {
+                    type: Sequelize.ENUM,
+                    values: ['cancelled', 'finished']
+                }
             },
             {
                 tableName: "classes",
@@ -40,7 +42,10 @@ class Service extends Model {
                 },
                 tutor: Sequelize.INTEGER,
                 subject: Sequelize.STRING,
-                level: Sequelize.ENUM('elementary', 'highschool', 'university'),
+                level: {
+                    type: Sequelize.ENUM,
+                    values: ['elementary', 'highschool', 'university']
+                },
                 price: Sequelize.INTEGER
             },
             {
@@ -69,7 +74,6 @@ class Tutor extends Model {
                 country: Sequelize.STRING,
                 phone: Sequelize.STRING,
                 email: Sequelize.STRING,
-
             },
             {
                 tableName: "tutors",
@@ -90,7 +94,12 @@ module.exports.handler = async (event) => {
             where: {
                 student: parseInt(id)
             },
-            include: [Service, Tutor]
+            include: [{
+                Service,
+                include: [{
+                    Tutor
+                }]
+            }]
         });
 
 

@@ -11,7 +11,9 @@ class Class extends Model {
                     primaryKey: true,
                     autoIncrement: true
                 },
-                service: Sequelize.INTEGER,
+                service: {
+                    type: Sequelize.INTEGER
+                },
                 student: Sequelize.INTEGER,
                 date: Sequelize.DATE,
                 start: Sequelize.TIME,
@@ -30,64 +32,12 @@ class Class extends Model {
     }
 }
 
-class Service extends Model {
-    static init(sequelize) {
-        return super.init({
-                service_ID: {
-                    type: Sequelize.INTEGER,
-                    primaryKey: true,
-                    autoIncrement:true
-                },
-                tutor: Sequelize.INTEGER,
-                subject: Sequelize.STRING,
-                level: Sequelize.ENUM('elementary', 'highschool', 'university'),
-                price: Sequelize.INTEGER
-            },
-            {
-                tableName: "services",
-                sequelize: sequelize,
-                timestamps: false,
-            }
-        );
-    }
-}
-
-class Tutor extends Model {
-    static init(sequelize) {
-        return super.init({
-                tutor_ID: {
-                    type: Sequelize.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true
-                },
-                name: Sequelize.STRING,
-                surname: Sequelize.STRING,
-                dob: Sequelize.DATE,
-                gender: Sequelize.BOOLEAN,
-                address: Sequelize.STRING,
-                town: Sequelize.STRING,
-                country: Sequelize.STRING,
-                phone: Sequelize.STRING,
-                email: Sequelize.STRING,
-
-            },
-            {
-                tableName: "tutors",
-                sequelize: sequelize,
-                timestamps: false,
-            }
-        );
-    }
-}
-
 module.exports.handler = async (event) => {
     try {
         const {id} = event.pathParameters;
         const c = await Class.init(databaseConnection);
         const classes = await c.findAll({
-            where: {
-                student: parseInt(id)
-            }
+            where: {student: parseInt(id)},
         });
 
         return {
