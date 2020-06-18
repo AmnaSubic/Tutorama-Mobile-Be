@@ -11,8 +11,8 @@ class Class extends Model {
                 },
                 service: {
                     type: Sequelize.INTEGER,
-                    references: 'services',
-                    referencesKey: 'service_ID'
+                    //references: 'services',
+                    //referencesKey: 'service_ID'
                 },
                 student: Sequelize.INTEGER,
                 date: Sequelize.DATE,
