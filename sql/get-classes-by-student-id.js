@@ -1,43 +1,26 @@
 "use strict";
-const { Sequelize, Model } = require("sequelize");
+const { Sequelize} = require("sequelize");
+const Class = require('../models/Class');
+const Service = require('../models/Service');
 
 const databaseConnection = new Sequelize("mysql://root:rootroot@localhost:3306/baza");
 
-class Class extends Model {
-    static init(sequelize) {
-        return super.init({
-                class_ID: {
-                    type: Sequelize.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true
-                },
-                service: {
-                    type: Sequelize.INTEGER
-                },
-                student: Sequelize.INTEGER,
-                date: Sequelize.DATE,
-                start: Sequelize.TIME,
-                end: Sequelize.TIME,
-                price: Sequelize.FLOAT,
-                place: Sequelize.STRING,
-                status: Sequelize.ENUM('started', 'cancelled', 'finished')
-
-            },
-            {
-                tableName: "classes",
-                sequelize: sequelize,
-                timestamps: false,
-            }
-        );
-    }
-}
+const s = Service.init(databaseConnection, Sequelize);
+const c = Class.init(databaseConnection, Sequelize);
+c.belongsTo(s, {foreignKey: 'service'});
+s.hasMany(c);
 
 module.exports.handler = async (event) => {
     try {
         const {id} = event.pathParameters;
-        const c = await Class.init(databaseConnection);
         const classes = await c.findAll({
-            where: {student: parseInt(id)},
+            attributes: {
+                exclude: ['ServiceServiceID']
+            },
+            where: {
+                student: parseInt(id)
+            },
+            include: [Service]
         });
 
         return {
